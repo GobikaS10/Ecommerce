@@ -1,0 +1,77 @@
+{
+  "name": "e-commerce",
+  "version": "0.0.1",
+  "size": {
+    "width": 3,
+    "height": 3
+  },
+  "workflowMapping": [],
+  "fileName": "manifest.json",
+  "datasetsMapping": [
+    {
+      "dataSetId": "ccbec447-c395-4929-b17e-b5a8f2d16dfe",
+      "alias": "test",
+      "fields": []
+    }
+  ],
+  "collectionsMapping": [
+    {
+   
+    "name": "testing",
+    "schema": {
+      "columns": [
+        { "name": "name", "type": "STRING" },
+        { "name": "email", "type": "STRING" },
+        { "name": "password", "type": "STRING" }
+      ]
+    },
+    "syncEnabled": false
+  },
+    {
+    "name": "orders",
+      "schema": {
+        "columns": [
+          { "name": "orderId", "type": "STRING" },
+          { "name": "userEmail", "type": "STRING" },
+          { "name": "userName", "type": "STRING" },
+          { "name": "items", "type": "STRING" },
+          { "name": "subtotal", "type": "STRING" },
+          { "name": "shipping", "type": "STRING" },
+          { "name": "tax", "type": "STRING" },
+          { "name": "total", "type": "STRING" },
+          { "name": "status", "type": "STRING" },
+          { "name": "createdAt", "type": "STRING" }
+        ]
+      },
+      "syncEnabled": true
+    },
+    {
+  "name": "products",
+  "schema": {
+    "columns": [
+      { "name": "id", "type": "STRING" },
+      { "name": "name", "type": "STRING" },
+      { "name": "subtitle", "type": "STRING" },
+      { "name": "price", "type": "STRING" },
+      { "name": "originalPrice", "type": "STRING" },
+      { "name": "rating", "type": "STRING" },
+      { "name": "reviewCount", "type": "STRING" },
+      { "name": "category", "type": "STRING" },
+      { "name": "badge", "type": "STRING" },
+      { "name": "image", "type": "STRING" },
+      { "name": "description", "type": "STRING" },
+      { "name": "tags", "type": "STRING" },
+      { "name": "inStock", "type": "STRING" },
+      { "name": "qtyAvailable", "type": "STRING" },
+      { "name": "sku", "type": "STRING" },
+      { "name": "brand", "type": "STRING" },
+      { "name": "createdAt", "type": "STRING" }
+    ]
+  },
+  "syncEnabled": true
+}
+  
+],
+  "id": "c0252085-d963-4085-a53e-1f76627c26aa",
+  "proxyId": "7e2c8dfd-2455-4893-a0f9-bcd0e29c7c68"
+}
