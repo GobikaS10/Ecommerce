@@ -357,6 +357,21 @@ export const updateDocument = async (collectionName, documentId, document) => {
     throw error;
   }
 };
+
+export const updateDocumentPassword = async (collectionName, documentId, document) => {
+  try {
+    const response = await domo.put(
+      `/domo/datastores/v1/collections/${collectionName}/documents/${documentId}`,
+      {
+        content: document,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error('Error updating document:', error);
+    throw error;
+  }
+};
 const DomoApi = {
   GetCurrentUser,
   GetAllUser,
@@ -379,7 +394,8 @@ const DomoApi = {
   FetchDatasetRecords,
   GetDataQueryOperators,
   getDocuments,
-  createDocument,updateDocument
+  createDocument,updateDocument,
+  updateDocumentPassword
 
 };
 

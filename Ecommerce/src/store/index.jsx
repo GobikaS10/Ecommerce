@@ -26,6 +26,7 @@ export const ACTIONS = {
    SET_SORT:       'SET_SORT',
   SET_PRICE_RANGE:'SET_PRICE_RANGE',
   SET_BADGE:      'SET_BADGE', 
+   SET_LOCATION: 'SET_LOCATION',
 };
 
 // ── Initial State ──────────────────────────────────────────────
@@ -43,6 +44,7 @@ const INITIAL_STATE = {
    sortBy:         'default',    // 'default' | 'price_asc' | 'price_desc' | 'rating' | 'newest'
   priceRange:     [0, 2000],    // [min, max]
   badgeFilter:    '',    
+    location: { city: 'Coimbatore', pin: '641001' },
 };
 
 // ── Pure Reducer ───────────────────────────────────────────────
@@ -124,6 +126,9 @@ case ACTIONS.SET_PRICE_RANGE:
 
 case ACTIONS.SET_BADGE:
   return { ...state, badgeFilter: action.payload };
+      case ACTIONS.SET_LOCATION:
+  return { ...state, location: action.payload };
+
 
     default:
       return state;
@@ -173,6 +178,9 @@ useEffect(() => {
 
   const logout = useCallback(() =>
     dispatch({ type: ACTIONS.LOGOUT }), []);
+  
+  const setLocation = useCallback((loc) =>
+  dispatch({ type: ACTIONS.SET_LOCATION, payload: loc }), []);
 
   const addToCart = useCallback(product =>
     dispatch({ type: ACTIONS.CART_ADD, payload: product }), []);
@@ -243,6 +251,7 @@ const setBadge = useCallback(badge => {
       setSort, 
       setPriceRange, 
       setBadge, 
+      setLocation, 
     }}>
       {children}
     </AppContext.Provider>

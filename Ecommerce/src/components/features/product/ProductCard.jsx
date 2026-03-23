@@ -121,7 +121,7 @@ export default function ProductCard({ product }) {
         {/* Add to cart */}
         <div className="mt-auto pt-3">
           <button
-            onClick={() => handleAddToCart(product)}
+             onClick={() => inCart ? navigate('cart') : handleAddToCart(product, 1)}
             onMouseEnter={() => setBtnHovered(true)}
             onMouseLeave={() => setBtnHovered(false)}
             className={`

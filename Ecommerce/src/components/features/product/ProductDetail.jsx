@@ -33,7 +33,7 @@ function Breadcrumb({ crumbs }) {
   );
 }
 
-// ── ImagePanel — UPDATED with zoom + thumbnails + trust badges ─
+// ── ImagePanel ────────────────────────────────────────────────
 function ImagePanel({ product }) {
   const [imgError,  setImgError]  = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
@@ -52,8 +52,6 @@ function ImagePanel({ product }) {
 
   return (
     <div className="flex flex-col gap-3">
-
-      {/* Main image with zoom */}
       <div
         className="relative rounded-2xl overflow-hidden bg-slate-100 cursor-zoom-in"
         style={{ aspectRatio: '1 / 1' }}
@@ -72,21 +70,16 @@ function ImagePanel({ product }) {
             <span className="text-[130px] select-none drop-shadow-xl">{product.emoji}</span>
           </div>
         )}
-
-        {/* Discount badge */}
         {disc > 0 && (
           <span className="absolute top-4 left-4 bg-red-500 text-white text-xs font-black px-3 py-1.5 rounded-xl shadow-lg tracking-wider">
             -{disc}% OFF
           </span>
         )}
-
-        {/* Zoom hint */}
         <span className="absolute bottom-3 right-3 bg-black/40 backdrop-blur-md text-white text-[10px] font-semibold px-3 py-1.5 rounded-full pointer-events-none">
           {zoomed ? '🔍 Click to zoom out' : '🔍 Click to zoom in'}
         </span>
       </div>
 
-      {/* Thumbnails — only shown when real image exists */}
       {hasImage && (
         <div className="grid grid-cols-4 gap-2">
           {thumbParams.map((params, i) => (
@@ -108,7 +101,108 @@ function ImagePanel({ product }) {
         </div>
       )}
 
+     
+    </div>
+  );
+}
 
+// ── DeliveryBlock ─────────────────────────────────────────────
+function DeliveryBlock({ price }) {
+  const { location } = useApp();
+
+  const getDeliveryDate = () => {
+    const d = new Date();
+    d.setDate(d.getDate() + 3);
+    return d.toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' });
+  };
+
+  return (
+    <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col gap-3">
+
+      {/* Deliver to row */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <svg className="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2"
+            strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <div>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none">
+              Deliver to
+            </p>
+            <p className="text-sm font-bold text-slate-900 mt-0.5">
+              {location.city}
+              {location.pin && (
+                <span className="text-slate-400 font-medium"> — {location.pin}</span>
+              )}
+            </p>
+          </div>
+        </div>
+        {/* Change — scrolls to top so user can use navbar location picker */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="text-xs font-semibold text-sky-500 hover:text-sky-700 transition-colors"
+        >
+          Change
+        </button>
+      </div>
+
+      <div className="border-t border-slate-200" />
+
+      {/* Delivery options */}
+      <div className="flex flex-col gap-2.5">
+
+        {/* Free delivery */}
+        <div className="flex items-start gap-2.5">
+          <svg className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2"
+            strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <rect x="1" y="3" width="15" height="13" rx="1"/>
+            <path d="M16 8h4l3 3v5h-7V8z"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+          <div className="flex-1">
+            <p className="text-xs font-bold text-slate-800">
+              Free delivery
+              <span className="text-emerald-600 ml-1.5">by {getDeliveryDate()}</span>
+            </p>
+            <p className="text-[10px] text-slate-400 mt-0.5 leading-relaxed">
+              {price >= 499
+                ? 'Free delivery on this order'
+                : `Add ₹${499 - price} more for free delivery`}
+            </p>
+          </div>
+        </div>
+
+        {/* Express delivery */}
+        <div className="flex items-start gap-2.5">
+          <svg className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+          <div className="flex-1">
+            <p className="text-xs font-bold text-slate-800">
+              Express delivery
+              <span className="text-slate-500 font-medium ml-1.5">₹49</span>
+            </p>
+            <p className="text-[10px] text-slate-400 mt-0.5">Get it today by 9 PM</p>
+          </div>
+        </div>
+
+        {/* Cash on delivery */}
+        <div className="flex items-start gap-2.5">
+          <svg className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2"
+            strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <rect x="2" y="5" width="20" height="14" rx="2"/>
+            <line x1="2" y1="10" x2="22" y2="10"/>
+          </svg>
+          <p className="text-xs font-bold text-slate-800">
+            Cash on delivery
+            <span className="text-emerald-600 font-medium ml-1.5">available</span>
+          </p>
+        </div>
+
+      </div>
     </div>
   );
 }
@@ -195,36 +289,39 @@ export default function ProductDetail() {
 
           <StockBadge inStock={p.inStock} />
 
-          {/* Qty + Add to Cart + Wishlist — UPDATED */}
+          {/* ── DELIVERY BLOCK — added between StockBadge and cart buttons ── */}
+          <DeliveryBlock price={p.price} />
+
+          {/* Qty + Add to Cart + Wishlist */}
           <div className="flex items-center gap-2">
             <QuantityStepper value={qty} onChange={setQty} />
             <button
-              onClick={() => handleAddToCart(p, qty)}
-              className={`flex-1 py-3.5 rounded-2xl text-sm font-black tracking-wide
-                flex items-center justify-center gap-2
-                transition-all duration-200 active:scale-95
-                ${inCart
-                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
-                  : 'bg-slate-900 hover:bg-slate-700 text-white shadow-sm hover:shadow-md'}`}
-            >
-              {inCart ? (
-                <>
-                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                  Added to Cart
-                </>
-              ) : (
-                <>
-                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <path d="M16 10a4 4 0 0 1-8 0"/>
-                  </svg>
-                  Add to Cart
-                </>
-              )}
-            </button>
+  onClick={() => inCart ? navigate('cart') : handleAddToCart(p, qty)}
+  className={`flex-1 py-3.5 rounded-2xl text-sm font-black tracking-wide
+    flex items-center justify-center gap-2
+    transition-all duration-200 active:scale-95
+    ${inCart
+      ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
+      : 'bg-slate-900 hover:bg-slate-700 text-white shadow-sm hover:shadow-md'}`}
+>
+  {inCart ? (
+    <>
+      <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      Go to Cart          {/* ← changed from "Added to Cart" */}
+    </>
+  ) : (
+    <>
+      <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      Add to Cart
+    </>
+  )}
+</button>
             <button
               onClick={() => toggleWishlist(p.id)}
               className={`w-14 py-3.5 rounded-2xl border-2 flex items-center justify-center text-xl shrink-0
@@ -237,7 +334,7 @@ export default function ProductDetail() {
             </button>
           </div>
 
-          {/* Buy Now — UPDATED */}
+          {/* Buy Now */}
           <button
             onClick={() => handleBuyNow(p, qty)}
             className="w-full py-3.5 rounded-2xl text-sm font-black tracking-wide text-white
@@ -253,12 +350,12 @@ export default function ProductDetail() {
             Buy Now — ₹{p.price}
           </button>
 
-          {/* Perks — unchanged */}
+          {/* Perks */}
           <PerksList />
         </div>
       </div>
 
-      {/* Related products — unchanged */}
+      {/* Related products */}
       {related.length > 0 && (
         <div>
           <h3 className="font-display text-2xl font-bold text-slate-900 mb-5 tracking-tight">

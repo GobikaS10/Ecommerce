@@ -69,7 +69,17 @@
     ]
   },
   "syncEnabled": true
-}
+}, {
+      "name": "password_resets",
+      "schema": {
+        "columns": [
+          { "name": "email", "type": "STRING" },
+          { "name": "status", "type": "STRING" },
+          { "name": "requestedAt", "type": "STRING" }
+        ]
+      },
+      "syncEnabled": false
+    }
   
 ],
   "id": "c0252085-d963-4085-a53e-1f76627c26aa",

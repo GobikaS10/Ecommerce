@@ -90,3 +90,11 @@ export const SHIPPING_COST           = 9.99;
     count: '4 products',
   },
 };
+ export const CITIES = [
+  { city: 'Coimbatore', pin: '641001' },
+  { city: 'Chennai',    pin: '600001' },
+  { city: 'Bangalore',  pin: '560001' },
+  { city: 'Mumbai',     pin: '400001' },
+  { city: 'Delhi',      pin: '110001' },
+  { city: 'Hyderabad',  pin: '500001' },
+];

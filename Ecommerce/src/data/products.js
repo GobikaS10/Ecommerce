@@ -241,4 +241,4 @@ export const PRODUCTS = [
   },
 ];
 
-export const CATEGORIES = ['All', 'Electronics', 'Fashion', 'Home', 'Books'];
+export const CATEGORIES = ['All', 'Electronics', 'Fashion', 'Home ', 'Books'];

@@ -106,14 +106,24 @@ export function useFilteredProducts(query, category) {
 }
 // ── useCartActions ────────────────────────────────────────────
 export function useCartActions() {
-  const { user, addToCart, navigate, showToast } = useApp();
+  const { user, addToCart, updateCartQty, navigate, showToast, cart } = useApp();
 
   const handleAddToCart = useCallback((product, qty = 1) => {
     if (!user) { navigate('login'); return false; }
-    for (let i = 0; i < qty; i++) addToCart(product);
+
+    const existing = cart.find(i => i.id === product.id);
+    if (existing) {
+      // Already in cart — just increase qty by the selected amount
+      updateCartQty(product.id, existing.qty + qty);
+    } else {
+      // Not in cart — add it once, then set correct qty
+      addToCart(product);
+      if (qty > 1) updateCartQty(product.id, qty);
+    }
+
     showToast(`${product.name} added to cart`, 'success');
     return true;
-  }, [user, addToCart, navigate, showToast]);
+  }, [user, addToCart, updateCartQty, navigate, showToast, cart]);
 
   const handleBuyNow = useCallback((product, qty = 1) => {
     if (handleAddToCart(product, qty)) navigate('cart');

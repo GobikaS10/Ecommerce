@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function AuthCard({ icon, title, subtitle, children }) {
+export default function AuthCard({ icon, title, subtitle, children }) {
   return (
     <div className="min-h-[85vh] flex items-center justify-center py-10 px-4">
       <div className="w-full max-w-[460px]">
@@ -30,8 +30,11 @@ export function AuthCard({ icon, title, subtitle, children }) {
             { icon: '🔒', text: 'SSL Secured' },
             { icon: '🛡️', text: 'Privacy Protected' },
             { icon: '✅', text: 'Verified Store' },
-          ].map(t => (
-            <div key={t.text} className="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium">
+          ].map((t) => (
+            <div
+              key={t.text}
+              className="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium"
+            >
               <span>{t.icon}</span>
               <span>{t.text}</span>
             </div>

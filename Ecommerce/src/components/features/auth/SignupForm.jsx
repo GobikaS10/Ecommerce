@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useApp } from "../../../store";
 import { useFormField } from "../../../hooks";
-import { AuthCard } from "./AuthCard";
+import AuthCard from "./AuthCard";
 import { createDocument, getDocuments } from "../../../API/domoAPI";
 
 const validateName = (v) => (!v.trim() ? "Full name is required" : "");
