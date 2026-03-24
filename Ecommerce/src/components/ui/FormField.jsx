@@ -39,7 +39,7 @@ export default function FormField({ label, type = 'text', value, onChange, onBlu
           `}
         />
       </div>
-      {error && (
+         {error && (
         <p className="flex items-center gap-1 text-[11px] text-red-600 font-medium">
           <span>✕</span> {error}
         </p>

@@ -27,10 +27,7 @@ const toDbRow = (p) => ({
   inStock:       String(p.inStock),          // true     → "true"
 });
 
-// ─────────────────────────────────────────────
-// STEP 5 — Map doc.content → usable JS object
-// (converts strings back to correct types)
-// ─────────────────────────────────────────────
+
 const fromDbRow = (doc) => {
   const c = doc.content;
   return {
@@ -53,19 +50,15 @@ const fromDbRow = (doc) => {
   };
 };
 
-// ─────────────────────────────────────────────
-// STEP 4 — Fetch all products using domo.get
-// ─────────────────────────────────────────────
+
 export const getProducts = async () => {
   const docs = await domo.get(
     `${BASE_URL}/collections/${COLLECTION}/documents/`
   );
-  return docs.map(fromDbRow);    // STEP 5 — map every doc.content
+  return docs.map(fromDbRow);    
 };
 
-// ─────────────────────────────────────────────
-// STEP 3 — Insert one product using domo.post
-// ─────────────────────────────────────────────
+
 export const createProduct = async (product) => {
   const doc = await domo.post(
     `${BASE_URL}/collections/${COLLECTION}/documents/`,

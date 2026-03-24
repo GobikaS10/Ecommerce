@@ -296,23 +296,23 @@ export default function ProductDetail() {
           <div className="flex items-center gap-2">
             <QuantityStepper value={qty} onChange={setQty} />
             <button
-  onClick={() => inCart ? navigate('cart') : handleAddToCart(p, qty)}
-  className={`flex-1 py-3.5 rounded-2xl text-sm font-black tracking-wide
-    flex items-center justify-center gap-2
-    transition-all duration-200 active:scale-95
-    ${inCart
-      ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
-      : 'bg-slate-900 hover:bg-slate-700 text-white shadow-sm hover:shadow-md'}`}
->
-  {inCart ? (
-    <>
-      <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-        <polyline points="20 6 9 17 4 12"/>
-      </svg>
-      Go to Cart          {/* ← changed from "Added to Cart" */}
-    </>
-  ) : (
-    <>
+                onClick={() => inCart ? navigate('cart') : handleAddToCart(p, qty)}
+                className={`flex-1 py-3.5 rounded-2xl text-sm font-black tracking-wide
+                  flex items-center justify-center gap-2
+                  transition-all duration-200 active:scale-95
+                      ${inCart
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm'
+                        : 'bg-slate-900 hover:bg-slate-700 text-white shadow-sm hover:shadow-md'}`}
+                                      >
+                      {inCart ? (
+                        <>
+                          <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12"/>
+                          </svg>
+                          Go to Cart          {/* ← changed from "Added to Cart" */}
+                        </>
+                      ) : (
+                        <>
       <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
         <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
         <line x1="3" y1="6" x2="21" y2="6"/>

@@ -61,7 +61,7 @@ export default function ProductCard({ product }) {
             flex items-center justify-center cursor-pointer overflow-hidden
           `}
         >
-           <img
+                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-300"

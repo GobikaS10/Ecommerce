@@ -11,7 +11,7 @@ import SignupForm   from '../components/features/auth/SignupForm';
 import ProductDetail from '../components/features/product/ProductDetail';
 import CartPage     from '../components/features/cart/CartPage';
 
-const PAGE_MAP = {
+ const PAGE_MAP = {
   home:    HomePage,
   login:   LoginForm,
   signup:  SignupForm,

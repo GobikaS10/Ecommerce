@@ -61,6 +61,7 @@ export const SHIPPING_COST           = 9.99;
 
 
  export const CATEGORY_META = {
+  
   Electronics: {
     image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&h=300&fit=crop&auto=format',
     color: 'border-sky-200',
@@ -90,7 +91,7 @@ export const SHIPPING_COST           = 9.99;
     count: '4 products',
   },
 };
- export const CITIES = [
+export const CITIES = [
   { city: 'Coimbatore', pin: '641001' },
   { city: 'Chennai',    pin: '600001' },
   { city: 'Bangalore',  pin: '560001' },
