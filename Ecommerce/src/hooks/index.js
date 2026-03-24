@@ -113,10 +113,10 @@ export function useCartActions() {
 
     const existing = cart.find(i => i.id === product.id);
     if (existing) {
-      // Already in cart — just increase qty by the selected amount
+    
       updateCartQty(product.id, existing.qty + qty);
     } else {
-      // Not in cart — add it once, then set correct qty
+    
       addToCart(product);
       if (qty > 1) updateCartQty(product.id, qty);
     }

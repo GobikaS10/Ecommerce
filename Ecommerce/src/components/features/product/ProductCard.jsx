@@ -1,8 +1,3 @@
-/**
- * components/features/product/ProductCard.jsx
- * Grid card: image + badge + name + rating + price + add-to-cart.
- */
-
 import React, { useState } from 'react';
 import { useApp } from '../../../store';
 import { useCartActions } from '../../../hooks';

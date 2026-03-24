@@ -271,12 +271,12 @@ export default function ProductDetail() {
 
           <StarRating rating={p.rating} reviewCount={p.reviewCount} />
 
-          {/* Description */}
+        
           <p className="text-sm text-slate-600 leading-relaxed pt-5 border-t border-slate-100">
             {p.description}
           </p>
 
-          {/* Pricing block */}
+       
           <div className="flex items-end gap-4">
             <span className="text-4xl font-black text-slate-900 leading-none">₹{p.price}</span>
             <div className="pb-0.5">
@@ -289,7 +289,7 @@ export default function ProductDetail() {
 
           <StockBadge inStock={p.inStock} />
 
-          {/* ── DELIVERY BLOCK — added between StockBadge and cart buttons ── */}
+         
           <DeliveryBlock price={p.price} />
 
           {/* Qty + Add to Cart + Wishlist */}
@@ -309,20 +309,20 @@ export default function ProductDetail() {
                           <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                             <polyline points="20 6 9 17 4 12"/>
                           </svg>
-                          Go to Cart          {/* ← changed from "Added to Cart" */}
+                          Go to Cart          
                         </>
                       ) : (
                         <>
-      <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <path d="M16 10a4 4 0 0 1-8 0"/>
-      </svg>
-      Add to Cart
-    </>
-  )}
-</button>
-            <button
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                  </svg>
+                  Add to Cart
+                </>
+              )}
+            </button>
+                        <button
               onClick={() => toggleWishlist(p.id)}
               className={`w-14 py-3.5 rounded-2xl border-2 flex items-center justify-center text-xl shrink-0
                 transition-all duration-200 hover:scale-105 active:scale-95

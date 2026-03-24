@@ -26,7 +26,7 @@ export function EmptyState({ icon = "🔍", title, subtitle, action }) {
  */
 export function SectionHeader({ title, subtitle, action }) {
   return (
-    <div className="flex items-end justify-between mb-5">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
       <div>
         <h2 className="section-title">{title}</h2>
         {subtitle && (

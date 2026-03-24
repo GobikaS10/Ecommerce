@@ -9,7 +9,7 @@ import { CATEGORY_META } from '../data/config';
 
 function CategoryCards({ active, onSelect }) {
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"> 
       {Object.entries(CATEGORY_META).map(([cat, meta]) => {
         const isActive = cat === active;
         return (
@@ -60,7 +60,7 @@ function PromoBanner({ onClick }) {
   return (
     <div
       onClick={onClick}
-      className="relative overflow-hidden rounded-2xl cursor-pointer group"
+      className="relative overflow-hidden rounded-2xl cursor-pointer group sm:px-8 py-4 sm:py-5"
       style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}
     >
       <div
@@ -100,7 +100,7 @@ function FilterBar({ sortBy, setSort, priceRange, setPriceRange, badgeFilter, se
   const hasActive = sortBy !== 'default' || priceRange[0] !== 0 || priceRange[1] !== 2000 || badgeFilter !== '';
 
   return (
-    <div className="flex items-center gap-3 flex-wrap">
+    <div className="flex flex-col sm:flex-row sm:items-center gap-3 flex-wrap">
 
       {/* ── Main pill group ── */}
       <div className="flex items-center bg-white border border-slate-200 rounded-[20px] overflow-hidden shadow-card h-[38px]">
