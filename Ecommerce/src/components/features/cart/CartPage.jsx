@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useApp } from '../../../store';
-import { useOrderSummary } from '../../../hooks';
-import QuantityStepper from '../../ui/QuantityStepper';
-import { Divider, EmptyState } from '../../ui/shared.jsx';
-import { createDocument } from '../../../API/domoAPI';
+import React, { useState } from "react";
+import { useApp } from "../../../store";
+import { useOrderSummary } from "../../../hooks";
+import QuantityStepper from "../../ui/QuantityStepper";
+import { Divider, EmptyState } from "../../ui/shared.jsx";
+import { createDocument } from "../../../API/domoAPI";
 
 // ── CartItem ───────────────────────────────────────────────────
 function CartItem({ item }) {
@@ -18,12 +18,12 @@ function CartItem({ item }) {
   return (
     <div
       className={`bg-white rounded-2xl border border-slate-100 shadow-card p-5 transition-all duration-300 ${
-        removing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+        removing ? "opacity-0 scale-95" : "opacity-100 scale-100"
       }`}
     >
       <div className="flex gap-5">
         <div
-          onClick={() => navigate('product', item)}
+          onClick={() => navigate("product", item)}
           className="w-24 h-24 rounded-xl overflow-hidden shrink-0 cursor-pointer border border-slate-100 hover:border-sky-300 transition-colors"
         >
           {item.image ? (
@@ -55,7 +55,7 @@ function CartItem({ item }) {
           <div className="flex items-start justify-between gap-3">
             <div>
               <p
-                onClick={() => navigate('product', item)}
+                onClick={() => navigate("product", item)}
                 className="font-bold text-slate-900 text-sm leading-snug cursor-pointer hover:text-sky-600 transition-colors"
               >
                 {item.name}
@@ -112,16 +112,16 @@ function CartItem({ item }) {
 
 // ── PromoCode ──────────────────────────────────────────────────
 function PromoCode() {
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState("");
   const [applied, setApplied] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   function applyCode() {
-    if (code.toUpperCase() === 'SHOPX10') {
+    if (code.toUpperCase() === "SHOPX10") {
       setApplied(true);
-      setError('');
+      setError("");
     } else {
-      setError('Invalid promo code. Try SHOPX10');
+      setError("Invalid promo code. Try SHOPX10");
       setApplied(false);
     }
   }
@@ -137,13 +137,17 @@ function PromoCode() {
         <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
           <span className="text-emerald-500 text-base">✅</span>
           <div>
-            <p className="text-xs font-bold text-emerald-700">SHOPX10 applied!</p>
-            <p className="text-[10px] text-emerald-600">10% discount added to your order</p>
+            <p className="text-xs font-bold text-emerald-700">
+              SHOPX10 applied!
+            </p>
+            <p className="text-[10px] text-emerald-600">
+              10% discount added to your order
+            </p>
           </div>
           <button
             onClick={() => {
               setApplied(false);
-              setCode('');
+              setCode("");
             }}
             className="ml-auto text-xs text-slate-400 hover:text-slate-700"
           >
@@ -158,11 +162,11 @@ function PromoCode() {
               value={code}
               onChange={(e) => {
                 setCode(e.target.value.toUpperCase());
-                setError('');
+                setError("");
               }}
               placeholder="Enter promo code"
               className="flex-1 text-sm bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all uppercase font-mono tracking-widest"
-              onKeyDown={(e) => e.key === 'Enter' && applyCode()}
+              onKeyDown={(e) => e.key === "Enter" && applyCode()}
             />
             <button
               onClick={applyCode}
@@ -173,9 +177,12 @@ function PromoCode() {
             </button>
           </div>
 
-          {error && <p className="text-xs text-red-500 mt-1.5 font-medium">{error}</p>}
+          {error && (
+            <p className="text-xs text-red-500 mt-1.5 font-medium">{error}</p>
+          )}
           <p className="text-[10px] text-slate-400 mt-1.5">
-            Try: <span className="font-mono font-bold tracking-widest">SHOPX10</span>
+            Try:{" "}
+            <span className="font-mono font-bold tracking-widest">SHOPX10</span>
           </p>
         </>
       )}
@@ -184,16 +191,26 @@ function PromoCode() {
 }
 
 // ── SummaryRow ─────────────────────────────────────────────────
-function SummaryRow({ label, value, valueClass = 'text-slate-900', bold = false, sub }) {
+function SummaryRow({
+  label,
+  value,
+  valueClass = "text-slate-900",
+  bold = false,
+  sub,
+}) {
   return (
     <div className="flex items-center justify-between">
       <div>
-        <span className={`text-sm ${bold ? 'font-black text-slate-900' : 'text-slate-500'}`}>
+        <span
+          className={`text-sm ${bold ? "font-black text-slate-900" : "text-slate-500"}`}
+        >
           {label}
         </span>
         {sub && <p className="text-[10px] text-slate-400">{sub}</p>}
       </div>
-      <span className={`text-sm font-semibold ${bold ? 'text-lg font-black' : ''} ${valueClass}`}>
+      <span
+        className={`text-sm font-semibold ${bold ? "text-lg font-black" : ""} ${valueClass}`}
+      >
         {value}
       </span>
     </div>
@@ -203,16 +220,17 @@ function SummaryRow({ label, value, valueClass = 'text-slate-900', bold = false,
 // ── OrderSummary ───────────────────────────────────────────────
 function OrderSummary({ cart }) {
   const { user, navigate, showToast, clearCart } = useApp();
-  const { subtotal, shipping, tax, total, freeShipRemaining } = useOrderSummary(cart);
+  const { subtotal, shipping, tax, total, freeShipRemaining } =
+    useOrderSummary(cart);
 
   const totalSaved = cart.reduce(
     (sum, item) => sum + (item.originalPrice - item.price) * item.qty,
-    0
+    0,
   );
 
   async function checkout() {
     if (!user) {
-      navigate('login');
+      navigate("login");
       return;
     }
 
@@ -227,31 +245,32 @@ function OrderSummary({ cart }) {
             name: item.name,
             price: item.price,
             qty: item.qty,
-            image: item.image || '',
-            category: item.category || '',
-          }))
+            image: item.image || "",
+            category: item.category || "",
+          })),
         ),
         subtotal: subtotal.toFixed(2),
         shipping: shipping.toFixed(2),
         tax: tax.toFixed(2),
         total: total.toFixed(2),
-        status: 'Placed',
+        status: "Placed",
         createdAt: new Date().toISOString(),
       };
 
-      console.log('Order Payload:', orderPayload);
+      console.log("Order Payload:", orderPayload);
 
-      await createDocument('orders', orderPayload);
+     await createDocument("orders", orderPayload);
 
-      showToast('🎉 Order placed successfully! Thank you.', 'success');
-      clearCart();
+// clear cart
+clearCart();
 
-      setTimeout(() => {
-        navigate('home');
-      }, 1200);
+// navigate to success page
+navigate("order-success");
+
+      
     } catch (error) {
-      console.error('Checkout failed:', error);
-      showToast('❌ Failed to place order. Please try again.', 'error');
+      console.error("Checkout failed:", error);
+      showToast("❌ Failed to place order. Please try again.", "error");
     }
   }
 
@@ -268,15 +287,14 @@ function OrderSummary({ cart }) {
 
           <SummaryRow
             label="Shipping"
-            value={shipping === 0 ? 'FREE' : `₹${shipping.toFixed(2)}`}
-            valueClass={shipping === 0 ? 'text-emerald-600 font-black' : 'text-slate-900'}
-            sub={shipping === 0 ? 'Free delivery applied' : undefined}
+            value={shipping === 0 ? "FREE" : `₹${shipping.toFixed(2)}`}
+            valueClass={
+              shipping === 0 ? "text-emerald-600 font-black" : "text-slate-900"
+            }
+            sub={shipping === 0 ? "Free delivery applied" : undefined}
           />
 
-          <SummaryRow
-            label="Estimated Tax (8%)"
-            value={`₹${tax.toFixed(2)}`}
-          />
+          <SummaryRow label="Estimated Tax (8%)" value={`₹${tax.toFixed(2)}`} />
 
           {freeShipRemaining > 0 && (
             <div className="bg-amber-50 border border-amber-200 rounded-xl px-3.5 py-3">
@@ -298,11 +316,7 @@ function OrderSummary({ cart }) {
 
           <Divider className="my-1" />
 
-          <SummaryRow
-            label="Order Total"
-            value={`₹${total.toFixed(2)}`}
-            bold
-          />
+          <SummaryRow label="Order Total" value={`₹${total.toFixed(2)}`} bold />
         </div>
 
         {totalSaved > 0 && (
@@ -361,7 +375,7 @@ function OrderSummary({ cart }) {
         </button>
 
         <button
-          onClick={() => navigate('home')}
+          onClick={() => navigate("home")}
           className="w-full mt-2.5 py-3 rounded-2xl text-xs font-semibold text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-all flex items-center justify-center gap-1.5"
         >
           ← Continue Shopping
@@ -375,7 +389,10 @@ function OrderSummary({ cart }) {
 export default function CartPage() {
   const { cart, navigate } = useApp();
   const totalItems = cart.reduce((s, i) => s + i.qty, 0);
-  const totalSaved = cart.reduce((s, i) => s + (i.originalPrice - i.price) * i.qty, 0);
+  const totalSaved = cart.reduce(
+    (s, i) => s + (i.originalPrice - i.price) * i.qty,
+    0,
+  );
 
   if (!cart.length) {
     return (
@@ -383,7 +400,7 @@ export default function CartPage() {
         icon="🛒"
         title="Your cart is empty"
         subtitle="Looks like you haven't added anything yet. Start shopping!"
-        action={{ label: 'Browse Products', onClick: () => navigate('home') }}
+        action={{ label: "Browse Products", onClick: () => navigate("home") }}
       />
     );
   }
@@ -396,7 +413,7 @@ export default function CartPage() {
             Shopping Cart
           </h1>
           <p className="text-sm text-slate-400 mt-1">
-            {totalItems} item{totalItems !== 1 ? 's' : ''} in your cart
+            {totalItems} item{totalItems !== 1 ? "s" : ""} in your cart
             {totalSaved > 0 && (
               <span className="ml-2 text-emerald-600 font-semibold">
                 · Saving ₹{totalSaved.toFixed(2)}
@@ -406,7 +423,7 @@ export default function CartPage() {
         </div>
 
         <button
-          onClick={() => navigate('home')}
+          onClick={() => navigate("home")}
           className="text-xs font-semibold text-sky-500 hover:text-slate-900 transition-colors flex items-center gap-1"
         >
           ← Continue Shopping

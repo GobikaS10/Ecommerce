@@ -29,42 +29,69 @@ export default function ProductDetail() {
 
   return (
     <div className="flex flex-col gap-10 animate-scale-in">
-      <nav className="flex items-center gap-2 text-xs text-slate-400">
-        {crumbs.map((c, i) => (
-          <span key={c.label} className="flex items-center gap-2">
-            {i > 0 && (
-              <svg
-                className="w-3 h-3 text-slate-300"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            )}
 
-            {c.onClick ? (
-              <button
-                onClick={c.onClick}
-                className="font-semibold text-sky-500 hover:text-slate-900 transition-colors"
-              >
-                {c.label}
-              </button>
-            ) : (
-              <span className="text-slate-500">{c.label}</span>
-            )}
-          </span>
-        ))}
-      </nav>
+      {/* 🔥 Breadcrumb + Right Actions */}
+      <div className="flex items-center justify-between sticky top-16 z-10 bg-slate-50/80 backdrop-blur py-2">
+        
+        {/* LEFT: Breadcrumb */}
+        <nav className="flex items-center gap-2 text-xs text-slate-400">
+          {crumbs.map((c, i) => (
+            <span key={c.label} className="flex items-center gap-2">
+              {i > 0 && (
+                <svg
+                  className="w-3 h-3 text-slate-300"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              )}
 
+              {c.onClick ? (
+                <button
+                  onClick={c.onClick}
+                  className="font-semibold text-sky-500 hover:text-slate-900 transition"
+                >
+                  {c.label}
+                </button>
+              ) : (
+                <span className="text-slate-500">{c.label}</span>
+              )}
+            </span>
+          ))}
+        </nav>
+
+        {/* RIGHT: Actions */}
+        <div className="flex items-center gap-1">
+          
+          {/* Back */}
+          <button
+            onClick={() => {
+              setCategory(p.category);
+              navigate('home');
+            }}
+            className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition"
+          >
+            ← Back
+          </button>
+
+          {/* Share */}
+          
+
+        </div>
+      </div>
+
+      {/* Product Section */}
       <div className="bg-white rounded-3xl border border-slate-100 shadow-card p-8 md:p-10 grid md:grid-cols-2 gap-10">
         <ProductGallery product={p} />
         <ProductInfo p={p} />
       </div>
 
+      {/* Related Products */}
       {related.length > 0 && (
         <div>
           <h3 className="font-display text-2xl font-bold text-slate-900 mb-5 tracking-tight">

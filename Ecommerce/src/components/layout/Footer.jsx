@@ -1,14 +1,15 @@
-/**
- * components/layout/Footer.jsx
- */
-
 import React from 'react';
-import { FOOTER_COLUMNS, LEGAL_LINKS, COPYRIGHT, SOCIAL_LINKS } from '../../data/config';
+import {
+  FOOTER_COLUMNS,
+  LEGAL_LINKS,
+  COPYRIGHT,
+  SOCIAL_LINKS,
+} from '../../data/config';
 
 function FooterLink({ label }) {
   return (
     <li>
-      <button className="text-sm text-slate-400 hover:text-slate-800 transition-colors text-left">
+      <button className="text-sm text-slate-400 hover:text-white transition">
         {label}
       </button>
     </li>
@@ -19,8 +20,7 @@ function SocialButton({ item }) {
   return (
     <a
       href={item.href}
-      aria-label={item.label}
-      className="w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-lg flex items-center justify-center text-sm transition-colors"
+      className="w-10 h-10 rounded-xl bg-slate-800/60 border border-slate-700 hover:bg-slate-700 flex items-center justify-center transition"
     >
       {item.emoji}
     </a>
@@ -29,54 +29,67 @@ function SocialButton({ item }) {
 
 export default function Footer() {
   return (
-    <footer className="mt-20 border-t border-slate-100">
-      {/* Main grid */}
-      <div className="max-w-[1280px] mx-auto px-7 py-14 grid grid-cols-2 md:grid-cols-4 gap-10">
-        {/* Brand */}
-        <div className="col-span-2 md:col-span-1">
-          <div className="flex items-center gap-2.5 mb-4">
-            <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
-              <span className="text-base">⚡</span>
+    <footer className="mt-20 w-full bg-[#020617] text-white">
+      
+      {/* INNER CONTAINER (same as navbar) */}
+      <div className="max-w-[1280px] mx-auto px-7 py-16">
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+          
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-1">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-11 h-11 bg-white text-slate-900 rounded-xl flex items-center justify-center">
+                ⚡
+              </div>
+              <span className="text-lg font-bold">ShopX</span>
             </div>
-            <span className="font-display text-lg font-bold text-slate-900 tracking-tight">ShopX</span>
-          </div>
-          <p className="text-sm text-slate-400 leading-relaxed max-w-[180px] mb-5">
-            Your premium destination for curated products across electronics, fashion, home & more.
-          </p>
-          <div className="flex gap-2">
-            {SOCIAL_LINKS.map(sl => <SocialButton key={sl.id} item={sl} />)}
-          </div>
-        </div>
 
-        {/* Link columns */}
-        {FOOTER_COLUMNS.map(col => (
-          <div key={col.heading}>
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">
-              {col.heading}
-            </h4>
-            <ul className="space-y-2.5">
-              {col.links.map(l => <FooterLink key={l} label={l} />)}
-            </ul>
+            <p className="text-sm text-slate-400 mb-6 max-w-[240px]">
+              Premium destination for electronics, fashion, and lifestyle products.
+              Fast delivery. Secure checkout.
+            </p>
+
+            <div className="flex gap-3">
+              {SOCIAL_LINKS.map((sl) => (
+                <SocialButton key={sl.id} item={sl} />
+              ))}
+            </div>
           </div>
-        ))}
+
+          {/* Columns */}
+          {FOOTER_COLUMNS.map((col) => (
+            <div key={col.heading}>
+              <h4 className="text-[11px] uppercase text-slate-500 mb-5 tracking-widest">
+                {col.heading}
+              </h4>
+
+              <ul className="space-y-3">
+                {col.links.map((l) => (
+                  <FooterLink key={l} label={l} />
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Legal bar */}
-      <div className="border-t border-slate-100">
-        <div className="max-w-[1280px] mx-auto px-7 py-5 flex flex-wrap items-center justify-between gap-4">
-          <p className="text-xs text-slate-400">{COPYRIGHT}</p>
-          <div className="flex gap-5">
-            {LEGAL_LINKS.map(l => (
-              <button key={l} className="text-xs text-slate-400 hover:text-slate-700 transition-colors">
+      {/* Bottom bar */}
+      <div className="border-t border-slate-800">
+        <div className="max-w-[1280px] mx-auto px-7 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          <p className="text-xs text-slate-500">{COPYRIGHT}</p>
+
+          <div className="flex gap-6 flex-wrap justify-center">
+            {LEGAL_LINKS.map((l) => (
+              <button key={l} className="text-xs text-slate-500 hover:text-white">
                 {l}
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-2 text-slate-400 text-xs">
-            <span>💳</span>
-            <span>🔒</span>
-            <span>🛡️</span>
-            <span>Secured & trusted</span>
+
+          <div className="text-xs text-slate-400 flex items-center gap-2">
+            🔒 Secure Payments
           </div>
         </div>
       </div>

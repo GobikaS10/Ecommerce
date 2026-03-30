@@ -7,11 +7,12 @@ import React from 'react';
 import { useApp } from '../store';
 
 
-import HomePage     from './HomePage';
+import HomePage     from '../mainPage/HomePage';
 import LoginForm    from '../components/features/auth/LoginForm';
 import SignupForm   from '../components/features/auth/SignupForm';
 import ProductDetail from '../components/features/product/ProductDetail';
 import CartPage     from '../components/features/cart/CartPage';
+import OrderSuccessPage from '../components/features/cart/OrderSuccessPage';
 
  const PAGE_MAP = {
   home:    HomePage,
@@ -19,6 +20,7 @@ import CartPage     from '../components/features/cart/CartPage';
   signup:  SignupForm,
   product: ProductDetail,
   cart:    CartPage,
+    "order-success": OrderSuccessPage, 
 };
 
 export default function Router() {

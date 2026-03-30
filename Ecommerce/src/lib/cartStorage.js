@@ -9,9 +9,16 @@ export async function saveCartToDomo(userEmail, cart) {
       userEmail.trim().toLowerCase()
   );
 
+  const compactCart = cart.map((item) => ({
+    id: item.id,
+    name: item.name,
+    price: item.price,
+    qty: item.qty,
+  }));
+
   const payload = {
     userEmail,
-    items: JSON.stringify(cart),
+    items: JSON.stringify(compactCart),
     updatedAt: new Date().toISOString(),
   };
 
@@ -21,7 +28,6 @@ export async function saveCartToDomo(userEmail, cart) {
     await createDocument('carts', payload);
   }
 }
-
 export async function loadCartFromDomo(userEmail) {
   const carts = await getDocuments('carts');
 

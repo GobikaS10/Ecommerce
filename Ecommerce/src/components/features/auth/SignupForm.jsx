@@ -32,19 +32,19 @@ function PasswordStrength({ password }) {
   const labels = ["Weak", "Fair", "Strong"];
 
   return (
-    <div className="flex flex-col gap-1.5 mt-1">
-      <div className="flex gap-1.5">
+    <div className="mt-1 space-y-1">
+      <div className="flex gap-1">
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className={`flex-1 h-1 rounded-full transition-all duration-300 ${
+            className={`flex-1 h-1 rounded-full ${
               i < score ? colors[score - 1] : "bg-slate-200"
             }`}
           />
         ))}
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2 flex-wrap">
         <span
           className={`text-[10px] font-bold ${
             score === 1
@@ -59,11 +59,11 @@ function PasswordStrength({ password }) {
           {score > 0 ? labels[score - 1] : ""}
         </span>
 
-        <div className="flex gap-1.5">
+        <div className="flex gap-1 flex-wrap justify-end">
           {checks.map((c) => (
             <span
               key={c.label}
-              className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full transition-all ${
+              className={`text-[8px] font-semibold px-1.5 py-0.5 rounded-full ${
                 c.pass
                   ? "bg-emerald-100 text-emerald-700"
                   : "bg-slate-100 text-slate-400"
@@ -120,7 +120,7 @@ export default function SignupForm() {
       const existingUser = users.find(
         (u) =>
           u.content.email?.trim().toLowerCase() ===
-          emailField.value.trim().toLowerCase(),
+          emailField.value.trim().toLowerCase()
       );
 
       if (existingUser) {
@@ -150,11 +150,11 @@ export default function SignupForm() {
 
   return (
     <AuthCard
-      icon={<span className="text-2xl">🚀</span>}
+      icon={<span className="text-xl sm:text-2xl">🚀</span>}
       title="Create account"
       subtitle="Join millions of happy ShopX customers"
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         <InputField
           label="Full Name"
           value={nameField.value}
@@ -208,7 +208,7 @@ export default function SignupForm() {
           }
         />
 
-        <div className="flex flex-col gap-0">
+        <div className="flex flex-col gap-0.5">
           <InputField
             label="Password"
             type={showPass ? "text" : "password"}
@@ -270,8 +270,9 @@ export default function SignupForm() {
           }
         />
 
-        <label className="flex items-start gap-3 cursor-pointer group mt-1">
-          <div
+        <label className="flex items-start gap-2.5 cursor-pointer group mt-0.5">
+          <button
+            type="button"
             onClick={() => setAgreed(!agreed)}
             className={`w-5 h-5 rounded-md border-2 shrink-0 mt-0.5 flex items-center justify-center transition-all duration-200 ${
               agreed
@@ -292,9 +293,9 @@ export default function SignupForm() {
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             )}
-          </div>
+          </button>
 
-          <span className="text-xs text-slate-500 leading-relaxed">
+          <span className="text-[11px] sm:text-xs text-slate-500 leading-relaxed">
             I agree to ShopX&apos;s{" "}
             <span className="text-sky-500 font-semibold cursor-pointer hover:underline">
               Terms of Service
@@ -307,7 +308,7 @@ export default function SignupForm() {
         </label>
 
         {submitErr && (
-          <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 text-xs font-medium px-4 py-3 rounded-xl">
+          <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 text-xs font-medium px-3 py-2.5 rounded-xl">
             <span>⚠️</span> {submitErr}
           </div>
         )}
@@ -315,10 +316,10 @@ export default function SignupForm() {
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="w-full py-4 mt-1 rounded-2xl text-sm font-black tracking-wide text-white
+          className="w-full py-3 mt-1 rounded-2xl text-sm font-black tracking-wide text-white
             bg-gradient-to-r from-slate-800 to-slate-900
             hover:from-slate-700 hover:to-slate-800
-            flex items-center justify-center gap-2.5
+            flex items-center justify-center gap-2
             transition-all duration-200 active:scale-95
             disabled:opacity-70 disabled:cursor-not-allowed shadow-sm"
         >
@@ -364,7 +365,7 @@ export default function SignupForm() {
         </button>
       </div>
 
-      <p className="text-center text-sm text-slate-400 mt-6">
+      <p className="text-center text-xs sm:text-sm text-slate-400 mt-4">
         Already have an account?{" "}
         <button
           onClick={() => navigate("login")}
