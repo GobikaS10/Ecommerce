@@ -144,7 +144,7 @@ export function useOrderSummary(cart) {
 
 // ── useRelatedProducts ────────────────────────────────────────
 export function useRelatedProducts(product, limit = 4) {
-  const { products } = useApp();          // ← from DB via store
+  const { products } = useApp();         
   if (!product) return [];
   return products
     .filter(p => p.category === product.category && p.id !== product.id)

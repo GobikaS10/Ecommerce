@@ -16,21 +16,14 @@ function AppShell() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
 
-        <CartSync />
-      {/* Fixed notification */}
+      <CartSync />
       <Toast toast={toast} />
-
-      {/* Sticky nav */}
       <Navbar />
-
-      {/* Page content */}
       <main className="max-w-[1280px] mx-auto px-7 py-9">
-        <Router />
+      <Router />
       </main>
-
-      {/* Footer */}
       <div className="max-w-[1280px] mx-auto px-7">
-        <Footer />
+       <Footer />
       </div>
     </div>
   );

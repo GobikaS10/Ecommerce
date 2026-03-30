@@ -95,14 +95,13 @@ function PromoBanner({ onClick }) {
   );
 }
 
-// ── Filter Bar ─────────────────────────────────────────────────
 function FilterBar({ sortBy, setSort, priceRange, setPriceRange, badgeFilter, setBadge, count }) {
   const hasActive = sortBy !== 'default' || priceRange[0] !== 0 || priceRange[1] !== 2000 || badgeFilter !== '';
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center gap-3 flex-wrap">
 
-      {/* ── Main pill group ── */}
+  
       <div className="flex items-center bg-white border border-slate-200 rounded-[20px] overflow-hidden shadow-card h-[38px]">
 
         {/* Sort */}
@@ -184,7 +183,7 @@ function FilterBar({ sortBy, setSort, priceRange, setPriceRange, badgeFilter, se
 
       </div>
 
-      {/* Clear all — only when filters active */}
+      
       {hasActive && (
         <button
           onClick={() => { setSort('default'); setPriceRange([0, 2000]); setBadge(''); }}
